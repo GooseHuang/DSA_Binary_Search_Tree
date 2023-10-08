@@ -120,5 +120,5 @@ if __name__=='__main__':
     import BinarySearchTree
 
     bst = BinarySearchTree.BinarySearchTree([5, 3, 7, 2, 4, 6, 8])
-    bst.delete(5)
+    delete(7, None, bst.root)
     bst.show()

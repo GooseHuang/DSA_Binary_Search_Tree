@@ -19,3 +19,10 @@ def insert(value, node):
             insert(value, node.left)
     else:
         pass
+
+if __name__=='__main__':
+    import BinarySearchTree
+
+    bst = BinarySearchTree.BinarySearchTree([5, 3, 7, 2, 4, 6, 8])
+    insert(9, bst.root)
+    bst.show()

@@ -18,8 +18,26 @@ def test():
         bst.insert(x)
 
     # bst.print_node()
+    # print('tata2')
+
+
+def test2():
+    node_list = """
+    5 3 9 7 4 2 1 8   3.5  3.2 3.7 3.6 3.8  3.1  3.3 9
+    """
+    node_list = node_list.strip().split(' ')
+    node_list = [float(x) if '.' in x else int(x) for x in node_list if x.strip()]
+    bst = BinarySearchTree.BinarySearchTree()
+    for x in node_list:
+        bst.insert(x)
+
+    # bst.print_node()
+    # print('tata2')
+
+
+
+def main():
     pass
 
-
 if __name__ == '__main__':
-    test()
+    main()
