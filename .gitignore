@@ -2,15 +2,12 @@
 /PyCharmStarter.py
 /test/
 /.idea/.gitignore
-/.idea/Gucci_Navigator.iml
 /.idea/misc.xml
 /.idea/modules.xml
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/vcs.xml
 /CreateBasicFolder.sh
-/library/Step1/
-/library/Step2/
 /library/archive/
 /output/
 /supplement_data/
