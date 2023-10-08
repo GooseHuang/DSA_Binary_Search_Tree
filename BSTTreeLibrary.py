@@ -5,7 +5,6 @@ os.chdir(FILE_PATH)
 sys.path.append(os.path.join(FILE_PATH,'packages'))
 
 import BinarySearchTree
-import Info
 def initial_tree(node_string):
 
     node_list = node_string.strip().split(' ')
@@ -31,6 +30,6 @@ bst2 = initial_tree(node_string)
 
 
 if __name__ == '__main__':
-    Info.print_node(bst2.root)
+    bst2.show()
 
     print('Done!')
