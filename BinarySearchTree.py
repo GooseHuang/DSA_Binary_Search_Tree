@@ -30,7 +30,7 @@ class BinarySearchTree:
         if self.root == None:
             return
         else:
-            root =  Delete.delete(value, None, self.root)
+            root = Delete.delete(value, None, self.root)
             if root:
                 self.root = root
 

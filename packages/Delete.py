@@ -14,7 +14,6 @@ def disconnect(parent, node):
         parent.right = None
         return 'right'
 
-
 def get_left_right_most(node):
     parent = node
     node = node.right
@@ -29,7 +28,6 @@ def get_left_right_most(node):
 
     return parent, node
 
-
 def get_right_left_most(node):
     parent = node
     node = node.left
@@ -43,7 +41,6 @@ def get_right_left_most(node):
     disconnect(parent, node)
 
     return parent, node
-
 
 def delete(value, parent, root):
 
