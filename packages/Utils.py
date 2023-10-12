@@ -51,6 +51,10 @@ def get_left_right_most(node):
     return parent, node
 
 def get_right_left_most(node):
+    # if not node:
+    #     return None, None
+
+
     parent = node
     node = node.left
     if not node:
