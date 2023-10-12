@@ -3,49 +3,12 @@ import os
 FILE_PATH = os.path.dirname(__file__)
 os.chdir(FILE_PATH)
 
-def disconnect(parent, node):
-    if parent == None:
-        return ''
+from Utils import connect, disconnect, get_left_right_most, get_right_left_most
 
-    elif node is parent.left:
-        parent.left = None
-        return 'left'
-    else:
-        parent.right = None
-        return 'right'
-
-def get_left_right_most(node):
-    parent = node
-    node = node.right
-    if not node:
-        return parent, node
-
-    while node.right:
-        parent = node
-        node = node.right
-
-    disconnect(parent, node)
-
-    return parent, node
-
-def get_right_left_most(node):
-    parent = node
-    node = node.left
-    if not node:
-        return parent, node
-
-    while node.left:
-        parent = node
-        node = node.left
-
-    disconnect(parent, node)
-
-    return parent, node
 
 def delete(value, parent, root):
 
     node = root
-
     if node == None:
         return
 
@@ -57,47 +20,53 @@ def delete(value, parent, root):
         if node.left == None and node.right == None:
             return
 
-        # Left as supplement first
+        # Left node as supplement
         elif node.left != None:
+
             parent_left_right_most, left_right_most = get_left_right_most(node.left)
+            disconnect(parent_left_right_most, left_right_most)
 
             if left_right_most:
                 if left_right_most.left:
-                    parent_left_right_most.right = left_right_most.left
+                    connect(parent_left_right_most, left_right_most.left)
             else:
                 left_right_most = parent_left_right_most
 
             if not node.left is left_right_most:
-                left_right_most.left = node.left
+                connect(left_right_most, node.left)
 
-            left_right_most.right = node.right
+            connect(left_right_most, node.right)
 
-            tmp = left_right_most
+            # Connect parent
+            if ind:
+                connect(parent, left_right_most)
+            else:
+                root = left_right_most
+                return root
 
-        # Right as supplement second
+        # Right node as supplement if there is no left
         else:
+
             parent_right_left_most, right_left_most = get_right_left_most(node.right)
+            disconnect(parent_right_left_most, right_left_most)
+
             if right_left_most:
                 if right_left_most.right:
-                    parent_right_left_most.left = right_left_most.right
+                    connect(parent_right_left_most, right_left_most.right)
             else:
                 right_left_most = parent_right_left_most
 
             if not node.right is right_left_most:
-                right_left_most.right = node.right
+                connect(right_left_most, node.right)
 
-            right_left_most.left = node.left
+            connect(right_left_most, node.left)
 
-            tmp = right_left_most
-
-        # Connect
-        if ind == 'left':
-            parent.left = tmp
-        elif ind == 'right':
-            parent.right = tmp
-        else:
-            root = tmp
-            return root
+            # Connect parent
+            if ind:
+                connect(parent, right_left_most)
+            else:
+                root = right_left_most
+                return root
 
     # Smaller
     elif value < node.value:
@@ -119,3 +88,5 @@ if __name__=='__main__':
     bst = BinarySearchTree.BinarySearchTree([5, 3, 7, 2, 4, 6, 8])
     delete(7, None, bst.root)
     bst.show()
+
+    print('\nDone!\n')
