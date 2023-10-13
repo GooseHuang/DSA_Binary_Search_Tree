@@ -182,6 +182,15 @@ if __name__=='__main__':
                   """
 
 
+    # node_list = [int(x.strip()) for x in node_string.strip().split() if x.strip()]
+    #
+    # bst = BinarySearchTree.BinarySearchTree()
+    #
+    # for x in node_list:
+    #     bst.insert(x)
+    #     root = get_balance(bst.root)
+    #     if root:
+    #         bst.root = root
 
     bst = initial_tree(node_string)
 
