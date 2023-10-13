@@ -10,11 +10,13 @@ def insert(value, node):
     if value > node.value:
         if node.right == None:
             node.right = Node.Node(value)
+            node.right.parent = node
         else:
             insert(value, node.right)
     elif value < node.value:
         if node.left == None:
             node.left = Node.Node(value)
+            node.left.parent = node
         else:
             insert(value, node.left)
     else:
