@@ -69,7 +69,7 @@ def get_balance(node):
     if node == None:
         return
 
-    # print('node:', node.value, 'depth:', get_depth(node), 'shortest:', get_shortest_path(node))
+    print('node:', node.value, 'depth:', get_depth(node), 'shortest:', get_shortest_path(node))
     # print_node(node)
 
     ind = trigger(node)
@@ -171,16 +171,16 @@ def get_balance(node):
 if __name__=='__main__':
     import BinarySearchTree
 
-    # bst = BinarySearchTree.BinarySearchTree([ 81, 77, 70, 12, 92, 39, 31,
-    #                                           59, 11, 25, 58, 52, 38, 84,
-    #                                           21, 79, 78, 18,])
 
-    # node_string = """
-    #                 20  72  77  91  2  33  48  30  71  40  17  50  44  86  11  47  43  82  39
-    #               """
+
     node_string = """
-                    28  73  31  67  94  12  52  21  81  98  83  45  47  11  23  97  91  88  9  66
+                    177  877   865  770  78  34  543  664  225  178   900  605  927  186  242  796  258  657  271   624  547  550  571  288  476  916  806  863  182  603  621  485  443  521  369  467   181  129  706  662   727  564  7  428  162   206  577  925  953  453  116  118  886  402  890   283  
                   """
+
+    node_string = """
+                    177  877   865  770  78  34  543  664  225  178   900  605  927  186  242  796  258  657  271   624  547  550  571  288  476  916  806  863  182  603  621  485  443  521  369  467   181  129  706  662   727  564  7  428  162   206  577  925  953  453  116  118  886  402  890  283
+                  """
+
 
 
     bst = initial_tree(node_string)
