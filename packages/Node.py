@@ -11,6 +11,9 @@ class Node:
         self.right = None
         self.parent = None
 
+        self.min_depth = 0
+        self.max_depth = 0
+
 
 
 

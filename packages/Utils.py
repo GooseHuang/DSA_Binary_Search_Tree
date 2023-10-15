@@ -37,33 +37,32 @@ def disconnect(parent, node):
 
 
 def get_left_right_most(node):
-    parent = node
-    node = node.right
     if not node:
-        return parent, node
+        return None
 
-    while node.right:
-        parent = node
-        node = node.right
-
-    # disconnect(parent, node)
-
-    return parent, node
-
-def get_right_left_most(node):
-    # if not node:
-    #     return None, None
-
-
-    parent = node
-    node = node.left
-    if not node:
-        return parent, node
-
-    while node.left:
-        parent = node
+    if node.left:
         node = node.left
 
-    # disconnect(parent, node)
+        while node.right:
+            parent = node
+            node = node.right
+        return node
 
-    return parent, node
+    else:
+        return None
+
+def get_right_left_most(node):
+    if not node:
+        return None
+
+    if node.right:
+        node = node.right
+
+        while node.left:
+            parent = node
+            node = node.left
+        return node
+
+    else:
+        return None
+
