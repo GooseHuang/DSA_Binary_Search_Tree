@@ -100,13 +100,19 @@ def update_node_depth(node):
 def update_chain_depth(node):
     # parent = node.parent
     parent = node
+    child = None
     while parent:
         update_node_depth(parent)
-
+        cur_parent = parent.parent
         if parent.max_depth - parent.min_depth >= 2:
-            get_balance(parent)
+            res_node = get_balance(parent)
+            if res_node:
+                if cur_parent:
+                    connect(cur_parent, res_node)
+                else:
+                    return res_node
 
-        parent = parent.parent
+        parent = cur_parent
 
 
 def get_balance(node):
@@ -166,7 +172,8 @@ def get_balance(node):
 
             if center is INFO_HUB.bst.root:
                 INFO_HUB.bst.root = left_right_most
-
+            elif not parent_of_center:
+                return left_right_most
 
         elif center.right.max_depth - center.left.min_depth >=2:
 
@@ -218,7 +225,7 @@ def get_balance(node):
             if center is INFO_HUB.bst.root:
                 INFO_HUB.bst.root = right_left_most
             elif not parent_of_center:
-                return res_node
+                return right_left_most
 
         else:
             pass
@@ -257,13 +264,16 @@ def get_balance(node):
             # disconnect(center, center.right)
             disconnect(center, center_left)
 
-            new_node = insert(center.value, center_right)
-
-            # Update
-            res_node = update_chain_depth(new_node)
-            if res_node:
-                center_right = res_node
+            if center_right:
+                new_node = insert(center.value, center_right)
+                res_node = update_chain_depth(new_node)
+                if res_node:
+                    center_right = res_node
+                    connect(left_right_most, center_right)
+            else:
+                center_right = Node.Node(center.value)
                 connect(left_right_most, center_right)
+
 
             # 3. Replace center with left right most
             connect(parent_of_center, left_right_most)
@@ -277,7 +287,7 @@ def get_balance(node):
             if center is INFO_HUB.bst.root:
                 INFO_HUB.bst.root = left_right_most
             elif not parent_of_center:
-                return res_node
+                return left_right_most
 
         else:
             pass
@@ -319,6 +329,7 @@ def get_balance(node):
                 center_left = res_node
                 connect(right_left_most, center_left)
 
+
             # 3. Replace center with right left most
             connect(parent_of_center, right_left_most)
             # connect(right_left_most, center.left)
@@ -331,7 +342,7 @@ def get_balance(node):
             if center is INFO_HUB.bst.root:
                 INFO_HUB.bst.root = right_left_most
             elif not parent_of_center:
-                return res_node
+                return right_left_most
 
         else:
             pass
@@ -395,6 +406,38 @@ def main():
     root = bst.root
     new_node = insert(55, root)
     update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(57, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(18, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(17, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(81, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(99, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(-1, root)
+    update_chain_depth(new_node)
+
+
+    root = bst.root
+    new_node = insert(-2, root)
+    update_chain_depth(new_node)
+
+
+
 
     pn(bst.root)
     # pn(new_node)
