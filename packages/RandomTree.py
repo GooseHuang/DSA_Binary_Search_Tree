@@ -24,7 +24,7 @@ def get_random_tree(n=20):
 
 if __name__ == '__main__':
     N = 500
-    node_string = get_random_tree(N)
+    node_string = get_random_tree(N) 
     print(node_string)
     print()
     bst = initial_tree(node_string)
