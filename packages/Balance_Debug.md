@@ -1,6 +1,98 @@
 ```python
 
 
+
+    root = bst.root
+    new_node = insert(11, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(24, root)
+    update_chain_depth(new_node)
+
+
+    root = bst.root
+    new_node = insert(27, root)
+    update_chain_depth(new_node)
+
+
+    root = bst.root
+    new_node = insert(2, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(3, root)
+    update_chain_depth(new_node)
+
+
+    root = bst.root
+    new_node = insert(15, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(29, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(37, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(0, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(100, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(55, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(57, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(18, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(17, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(81, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(99, root)
+    update_chain_depth(new_node)
+
+    root = bst.root
+    new_node = insert(-1, root)
+    update_chain_depth(new_node)
+
+
+    root = bst.root
+    new_node = insert(-2, root)
+    update_chain_depth(new_node)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 print_node(node)
 
 print_node(center)
