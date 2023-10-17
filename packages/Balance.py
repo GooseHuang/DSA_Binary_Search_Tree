@@ -176,12 +176,10 @@ def get_balance(node):
         new_center = balance_operation(center, ind)
         if new_center:
             return new_center
-
     else:
         # Skip
         pass
     return
-
 
 def balance_insert(bst, value):
     if not bst.root:
@@ -190,7 +188,6 @@ def balance_insert(bst, value):
     root = bst.root
     new_node = insert(value, root)
     update_chain_depth(new_node)
-
 
 def balance_delete(bst, value):
     pass
