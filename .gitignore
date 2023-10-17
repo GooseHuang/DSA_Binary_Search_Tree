@@ -18,3 +18,6 @@
 /library/
 /packages/Balance_Reference.py
 /.idea/DSA_Binary_Search_Tree.iml
+!/packages/Compare_Base.py
+/packages/Compare_Base.py
+/packages/Compare_Reversion.py

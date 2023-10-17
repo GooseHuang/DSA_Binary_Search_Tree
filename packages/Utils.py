@@ -66,3 +66,24 @@ def get_right_left_most(node):
     else:
         return None
 
+def get_depth(node):
+    if node == None:
+        return 0
+
+    left_depth = get_depth(node.left)
+    right_depth = get_depth(node.right)
+
+    return max(left_depth, right_depth) + 1
+
+
+
+def get_shortest_path(node):
+    if node == None:
+        return 0
+
+    left_depth = get_shortest_path(node.left)
+    right_depth = get_shortest_path(node.right)
+
+    return min(left_depth, right_depth) + 1
+
+
