@@ -121,7 +121,7 @@ def balance_operation(center, ind):
 
     """
 
-    # Get edge node from the longer branch and pick it up
+    # Get edge node from longer branch and pick it up
     new_center = get_edge_node(center, ind)
 
     # Disconnect center from its parent and children
@@ -145,41 +145,28 @@ def get_balance(node):
         return
     center = node
 
+
+    ind = ''
     if center.left and center.right:
+
         if center.left.max_depth - center.right.min_depth >=2:
-
             ind = 'left_to_right'
-            new_center = balance_operation(center, ind)
-            if new_center:
-                return new_center
-
         elif center.right.max_depth - center.left.min_depth >=2:
-
             ind = 'right_to_left'
-            new_center = balance_operation(center, ind)
-            if new_center:
-                return new_center
-
-        else:
-            # Skip
-            pass
 
     elif center.left and center.left.max_depth >=1:
         ind = 'left_to_right'
-        new_center = balance_operation(center, ind)
-        if new_center:
-            return new_center
-
 
     elif center.right and center.right.max_depth >=1:
         ind = 'right_to_left'
-        new_center = balance_operation(center, ind)
-        if new_center:
-            return new_center
+
     else:
-        # Skip
-        pass
-    return
+        return
+
+    new_center = balance_operation(center, ind)
+    if new_center:
+        return new_center
+
 
 def balance_insert(bst, value):
     if not bst.root:
