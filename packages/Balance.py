@@ -50,8 +50,7 @@ def update_chain_depth(node):
         parent = cur_parent
 
 
-def balance_operation(center, ind):
-    # 2. Get right most from left branch
+def get_edge_node(center, ind):
     if ind == 'left_to_right':
         new_center = get_left_right_most(center)
         new_center_child = new_center.left
@@ -62,9 +61,7 @@ def balance_operation(center, ind):
         raise ValueError('This should not happen.')
 
     new_center_parent = new_center.parent
-
     disconnect(new_center_parent, new_center)
-
     if new_center_child:
         if not new_center_parent is center:
             disconnect(new_center, new_center_child)
@@ -72,10 +69,10 @@ def balance_operation(center, ind):
         else:
             update_node_depth(new_center_parent)
 
-    # Update
     update_chain_depth(new_center_parent)
+    return new_center
 
-    # 1. Center to right
+def get_center_disconnected(center):
     parent_of_center = center.parent
     center_left = center.left
     center_right = center.right
@@ -83,7 +80,9 @@ def balance_operation(center, ind):
     disconnect(parent_of_center, center)
     disconnect(center, center_left)
     disconnect(center, center_right)
+    return parent_of_center, center_left, center_right
 
+def inset_center_to_shorter_branch(center, center_left, center_right, ind):
     if ind == 'left_to_right':
         if center_right:
             new_node = insert(center.value, center_right)
@@ -103,21 +102,42 @@ def balance_operation(center, ind):
     else:
         raise ValueError('This should not happen.')
 
-    # 3. Replace center with left right most
+    return center_left, center_right
+
+def replace_center(new_center, parent_of_center, center_left, center_right):
     connect(parent_of_center, new_center)
     if center_left:
         connect(new_center, center_left)
     if center_right:
         connect(new_center, center_right)
 
-    # Update
     update_chain_depth(new_center)
+    return
 
+def balance_operation(center, ind):
+    """
+
+    Balance the tree from longer branch to the shorter branch.
+
+    """
+
+    # Get edge node from the longer branch and pick it up
+    new_center = get_edge_node(center, ind)
+
+    # Disconnect center from its parent and children
+    parent_of_center, center_left, center_right = get_center_disconnected(center)
+
+    # Insert center into the shorter branch
+    center_left, center_right = inset_center_to_shorter_branch(center, center_left, center_right, ind)
+
+    # Replace center with the new center
+    replace_center(new_center, parent_of_center, center_left, center_right)
+
+    # Return new center if it is the root or it is disconnected
     if center is INFO_HUB.bst.root:
         INFO_HUB.bst.root = new_center
     elif not parent_of_center:
         return new_center
-
 
 
 def get_balance(node):
@@ -172,6 +192,13 @@ def balance_insert(bst, value):
     update_chain_depth(new_node)
 
 
+def balance_delete(bst, value):
+    pass
+
+
+def batch_balance_insert(bst, node_list):
+    for x in node_list:
+        balance_insert(bst, x)
 
 def main():
     bst = BinarySearchTree.BinarySearchTree()
@@ -181,9 +208,7 @@ def main():
                   """
     node_list = string_to_list(node_string)
     print('Length: ', len(node_list))
-    for x in node_list:
-        # print('Inserting: ', x)
-        balance_insert(bst, x)
+    batch_balance_insert(bst, node_list)
     pn(bst.root)
 
 
@@ -195,9 +220,7 @@ def main():
                   """
     node_list = string_to_list(node_string)
     print('Length: ', len(node_list))
-    for x in node_list:
-        # print('Inserting: ', x)
-        balance_insert(bst, x)
+    batch_balance_insert(bst, node_list)
     pn(bst.root)
 
 
@@ -209,9 +232,7 @@ def main():
                   """
     node_list = string_to_list(node_string)
     print('Length: ', len(node_list))
-    for x in node_list:
-        # print('Inserting: ', x)
-        balance_insert(bst, x)
+    batch_balance_insert(bst, node_list)
     pn(bst.root)
 
 
