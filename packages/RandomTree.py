@@ -33,7 +33,7 @@ if __name__ == '__main__':
     print(node_string)
     print()
     bst = initial_tree(node_string)
-    # bst.show()
+    bst.show()
 
 
     print('Done!')

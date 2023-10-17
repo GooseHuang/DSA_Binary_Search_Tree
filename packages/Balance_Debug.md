@@ -1,6 +1,14 @@
 ```python
 
 
+class InfoHub:
+    def __init__(self):
+        pass
+
+INFO_HUB = InfoHub()
+INFO_HUB.bst = bst
+
+
 # Try Exception
     # try:
     #     main()
