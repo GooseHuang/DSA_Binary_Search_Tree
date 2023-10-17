@@ -80,16 +80,18 @@
 
 
 
+pn(parent_right_left_most.left.parent)
 
 
+pn(center.right.left)
+pn(center.right.left.parent)
 
 
+pn(root.right.left)
 
+pn(root.right.left.parent)
 
-
-
-
-
+pn(right_left_most.right.left.parent)
 
 
 

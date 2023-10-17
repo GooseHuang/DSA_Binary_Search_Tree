@@ -136,7 +136,9 @@ def get_balance(node):
             disconnect(parent_left_right_most, left_right_most)
             if left_right_most.left:
                 if not parent_left_right_most is center:
-                    connect(parent_left_right_most, left_right_most.left)
+                    tmp_left = left_right_most.left
+                    disconnect(left_right_most, tmp_left)
+                    connect(parent_left_right_most, tmp_left)
                 else:
                     update_node_depth(parent_left_right_most)
 
@@ -149,11 +151,10 @@ def get_balance(node):
             center_right = center.right
 
             disconnect(parent_of_center, center)
-
-            new_node = insert(center.value, center_right)
-
             disconnect(center, center.right)
             disconnect(center, center.left)
+
+            new_node = insert(center.value, center_right)
 
             # Update
             res_node = update_chain_depth(new_node)
@@ -185,7 +186,9 @@ def get_balance(node):
 
             if right_left_most.right:
                 if not parent_right_left_most is center:
-                    connect(parent_right_left_most, right_left_most.right)
+                    tmp_right = right_left_most.right
+                    disconnect(right_left_most, tmp_right)
+                    connect(parent_right_left_most, tmp_right)
                 else:
                     update_node_depth(parent_right_left_most)
 
@@ -193,17 +196,16 @@ def get_balance(node):
             # Update
             update_chain_depth(parent_right_left_most)
 
-            # 1. Center to left
-            parent_of_center = center.parent
-            disconnect(parent_of_center, center)
-
-            new_node = insert(center.value, center.left)
-
             center_left = center.left
             center_right = center.right
 
+            # 1. Center to left
+            parent_of_center = center.parent
+            disconnect(parent_of_center, center)
             disconnect(center, center.right)
             disconnect(center, center.left)
+
+            new_node = insert(center.value, center_left)
 
             # Update
             res_node = update_chain_depth(new_node)
@@ -248,7 +250,9 @@ def get_balance(node):
 
             if left_right_most.left:
                 if not parent_left_right_most is center:
-                    connect(parent_left_right_most, left_right_most.left)
+                    tmp_left = left_right_most.left
+                    disconnect(left_right_most, tmp_left)
+                    connect(parent_left_right_most, tmp_left)
                 else:
                     update_node_depth(parent_left_right_most)
 
@@ -305,7 +309,9 @@ def get_balance(node):
             disconnect(parent_right_left_most, right_left_most)
             if right_left_most.right:
                 if not parent_right_left_most is center:
-                    connect(parent_right_left_most, right_left_most.right)
+                    tmp_right = right_left_most.right
+                    disconnect(right_left_most, tmp_right)
+                    connect(parent_right_left_most, tmp_right)
                 else:
                     update_node_depth(parent_right_left_most)
 
@@ -387,6 +393,83 @@ def main():
         balance_insert(bst, x)
     pn(bst.root)
 
+
+    bst = BinarySearchTree.BinarySearchTree()
+    INFO_HUB.bst = bst
+    node_string = """
+                    177  877  421  438  865
+                """
+    node_list = string_to_list(node_string)
+    for x in node_list:
+        print('Inserting: ', x)
+        if x == 476:
+            print()
+        balance_insert(bst, x)
+
+
+    x = 770
+    balance_insert(bst, x)
+    root = bst.root
+    pn(root)
+
+
+
+
+    bst = BinarySearchTree.BinarySearchTree()
+    INFO_HUB.bst = bst
+    node_string = """
+                    177  877  421  438  865  770  78  34  543  664  225  178  855   900  605
+                     """
+    node_list = string_to_list(node_string)
+    for x in node_list:
+        print('Inserting: ', x)
+        if x == 476:
+            print()
+        balance_insert(bst, x)
+
+
+    x = 534
+    balance_insert(bst, x)
+    root = bst.root
+    pn(root)
+
+
+
+
+    bst = BinarySearchTree.BinarySearchTree()
+    INFO_HUB.bst = bst
+    node_string = """
+                    177  877  421  438  865  770  78  34  543  664  225  178  855  900  605  534
+                     """
+    node_list = string_to_list(node_string)
+    for x in node_list:
+        print('Inserting: ', x)
+        if x == 476:
+            print()
+        balance_insert(bst, x)
+    pn(bst.root)
+
+
+
+
+
+    bst = BinarySearchTree.BinarySearchTree()
+    INFO_HUB.bst = bst
+    node_string = """
+                    177  877  421  438  865  770  78  34  543  664  225  178  855  900  605  534  927  186  242  796  258  657  271  816  624  547  550  571  288  476
+                     """
+    node_list = string_to_list(node_string)
+    for x in node_list:
+        print('Inserting: ', x)
+        if x == 476:
+            print()
+        balance_insert(bst, x)
+    pn(bst.root)
+
+
+
+
+
     bst = BinarySearchTree.BinarySearchTree()
     INFO_HUB.bst = bst
     node_string = """
@@ -394,6 +477,9 @@ def main():
                   """
     node_list = string_to_list(node_string)
     for x in node_list:
+        print('Inserting: ', x)
+        if x == 476:
+            print()
         balance_insert(bst, x)
     pn(bst.root)
 
