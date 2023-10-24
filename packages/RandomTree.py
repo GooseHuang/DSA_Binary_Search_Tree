@@ -17,7 +17,7 @@ def initial_tree(node_string):
     return bst
 
 def get_random_tree(n=20):
-    res = '  '.join( set([str(random.randint(0, 1000000)) for x in range(n)]))
+    res = '  '.join( set([str(random.randint(0, 100)) for x in range(n)]))
     return res
 
 def string_to_list(node_string):
@@ -28,7 +28,7 @@ def string_to_list(node_string):
 
 
 if __name__ == '__main__':
-    N = 10000
+    N = 20
     node_string = get_random_tree(N) 
     print(node_string)
     print()

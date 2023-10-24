@@ -44,7 +44,6 @@ def get_left_right_most(node):
         node = node.left
 
         while node.right:
-            parent = node
             node = node.right
         return node
 
@@ -59,7 +58,6 @@ def get_right_left_most(node):
         node = node.right
 
         while node.left:
-            parent = node
             node = node.left
         return node
 
