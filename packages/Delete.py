@@ -90,101 +90,104 @@ import Balance
 #             return
 
 # Delete with node return
+
+
 def delete(value, root):
 
     node = root
     if node == None:
         return
 
-    print(node.value)
-
     # Matched
     if node.value == value:
         parent = node.parent
         ind = disconnect(parent, node)
 
-        node_left = node.left
-        node_right = node.right
-
-        disconnect(node, node_left)
-        disconnect(node, node_right)
-
-
         # No supplement
-        if node_left== None and node_right:
+        if node.left == None and node.right == None:
+
             res = Balance.update_chain_depth(parent)
-            return res
+
+            if res:
+                print()
+
+            return
 
         # Left node as supplement
-        elif node_left != None:
+        elif node.left != None:
 
-            # Disconnect edge node
-            tmp = node_left
-            while tmp.right:
-                tmp = tmp.right
-            left_right_most = tmp
+            left_right_most = get_left_right_most(node)
             parent_left_right_most = left_right_most.parent
             disconnect(parent_left_right_most, left_right_most)
+            Balance.update_node_depth(parent_left_right_most)
 
-            # Connect children of edge node
-            if left_right_most.left:
-                tmp = left_right_most.left
-                disconnect(left_right_most, tmp)
-                connect(parent_left_right_most, tmp)
-                res = Balance.update_chain_depth(parent_left_right_most)
-                print()
-            # Connect new center node
+            tmp_left = left_right_most.left
+            tmp_right = left_right_most.right
+
+            if tmp_left:
+                connect(parent_left_right_most, left_right_most.left)
+                Balance.update_node_depth(parent_left_right_most)
+
             if not node.left is left_right_most:
-                connect(left_right_most, node_left)
+                connect(left_right_most, node.left)
+                Balance.update_node_depth(left_right_most)
 
-            connect(left_right_most, node_right)
+            connect(left_right_most, node.right)
             Balance.update_node_depth(left_right_most)
-            res = Balance.get_balance(left_right_most)
-            print()
+
+            res = Balance.update_chain_depth(left_right_most)
             if res:
                 left_right_most = res
 
             # Connect parent
             if ind:
                 connect(parent, left_right_most)
-                res = Balance.update_chain_depth(left_right_most)
-                print()
+                res = Balance.update_chain_depth(parent)
+                # print('left res:', res)
+                if res:
+                    # pn(res)
+                    # print()
+                    root = res
+                    return root
             else:
                 root = left_right_most
                 return root
 
         # Right node as supplement if there is no left
         else:
-            tmp = node_right
-            while tmp.left:
-                tmp = tmp.left
-            right_left_most = tmp
+
+            right_left_most = get_right_left_most(node)
             parent_right_left_most = right_left_most.parent
             disconnect(parent_right_left_most, right_left_most)
-
+            Balance.update_node_depth(parent_right_left_most)
 
             if right_left_most.right:
-                tmp = right_left_most.right
-                disconnect(right_left_most, tmp)
-                connect(parent_right_left_most, tmp)
-                res = Balance.update_chain_depth(parent_right_left_most)
-                print()
+                connect(parent_right_left_most, right_left_most.right)
+                Balance.update_node_depth(parent_right_left_most)
 
-            if not node_right is right_left_most:
-                connect(right_left_most, node_right)
 
-            connect(right_left_most, node_left)
+            if not node.right is right_left_most:
+                connect(right_left_most, node.right)
+                Balance.update_node_depth(right_left_most)
+
+            connect(right_left_most, node.left)
             Balance.update_node_depth(right_left_most)
-            res = Balance.get_balance(right_left_most)
+
+            res = Balance.update_chain_depth(right_left_most)
             if res:
                 right_left_most = res
-            print()
+
+
 
             # Connect parent
             if ind:
                 connect(parent, right_left_most)
-                res = Balance.update_chain_depth(right_left_most)
-                print()
+                res = Balance.update_chain_depth(parent)
+                # print('right res:', res)
+                if res:
+                    # pn(res)
+                    root = res
+                    return root
             else:
                 root = right_left_most
                 return root
@@ -192,32 +195,19 @@ def delete(value, root):
     # Smaller
     elif value < node.value:
         if node.left:
-
-            tmp = node.left
-            disconnect(node, tmp)
-            res = delete(value, tmp)
-            print()
-            if res:
-                connect(node, res)
-            else:
-                connect(node, tmp)
+            root = delete(value, node.left)
+            return root
         else:
             return
 
     # Larger
     elif value > node.value:
         if node.right:
-            tmp = node.right
-            disconnect(node, tmp)
-            res = delete(value, tmp)
-            print()
-            if res:
-                connect(node, res)
-            else:
-                connect(node, tmp)
-
+            root = delete(value, node.right)
+            return root
         else:
             return
+
 
 
 if __name__=='__main__':
